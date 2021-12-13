@@ -1,5 +1,5 @@
-# 3D-cell-segmentation-with-ImageJ
-## Introduction
+# **3D cell segmentation using ImageJ**
+## **Introduction**
 Here, I will show you an ImageJ pipeline for 3D cell segmentation. In this example, we are working on a set of z-stack images composed by three different channel: the first channel, which represents the fluorophore intensity of the protein of interest; the second channel, where you can find the cytoplasm, and the third channel, which represents the nuclei. 
 
 ![image](https://user-images.githubusercontent.com/91415505/145820849-c57179aa-5be3-43b0-8aee-024fdca582fb.png)
@@ -15,19 +15,19 @@ You need to have the **MorphoLibJ** and the ImageJ **3D Suite** Plugins installe
 
 -**MorphoLibJ**: Add the **IJPB-plugins** to the ImageJ updater.
 
-### 1. Split Channels
+### **1. Split Channels**
 
 Run **Split Channels**. You can rename the first channel as “**Intensity**”, and the third channel as “**Nuclei**”. **Select** the Nuclei window.
 
 ![image](https://user-images.githubusercontent.com/91415505/145821230-af10218c-48ea-4fd6-ab66-3ff42e796af7.png)
 
-### 2. 3D filtering
+### **2. 3D filtering**
 
 Apply a 3D filter to reduce noise and smooth the image. On the ImageJ main menu, we will go to **Plugins > 3D > 3D Fast Filters**.  I recommend you to use a **Median Filter**. In our case, we will use the following options. In your case, change the parameters until you are happy with the results.
 
 ![image](https://user-images.githubusercontent.com/91415505/145821669-094da6c0-6d25-437f-a887-62f5332d5fdb.png)
 
-### 3. Get a thresholding value
+### 3. **Get a thresholding value**
 
 You need to manually select a pixel value for creating a binary image which delimitates the all the nuclei. For this purpose, we will use the measurement tools within ImageJ. Do as it follows:
 
@@ -43,51 +43,51 @@ With the profile’s plot, you can now **decide which value you will use** for t
 
 ![image](https://user-images.githubusercontent.com/91415505/145822349-cb873034-3ea2-4ae2-8a8f-7a8e0e19d920.png)
 
-### 4. Manual thresholding
+### **4. Manual thresholding**
 
 We need to apply the threshold value that we just selected. We will go, in the ImageJ main menu, to **Plugins > 3D > 3D Simple segmentation**. At “Low threshold (Included)” we will write the chosen threshold value. We will leave the other options as they are. When we click in “Ok”, two images will appear: one called “Bin”, which is the binary image where we will work from now on, and another called “Seg”, that we will not use. You can close the “Seg” one and continue with the next step.
 
 ![image](https://user-images.githubusercontent.com/91415505/145822614-bea1319e-7942-4d38-bed9-4041e04d8a58.png)
 
-### 5. Opening
+### **5. Opening**
 
 Remember to select the Bin window. We need to apply a **3D morphological operation**, an **Opening** (Erosion + Dilation), for filling small holes and suppressing noise. We go to **Plugins > MorphoLibJ > Morphological Filters (3D)**. We select Opening in “Operation” and Ball in “Element shape”. For the X, Y and Z radius, you can select different values of the X and Y radius according to your images, and choose the one that gives you a better result, but always leave the Z radius in 0. In our case, we use a value of 10 pixels for the X and Y radius. 
 
 ![image](https://user-images.githubusercontent.com/91415505/145822798-8a9b509a-762d-49c2-b803-b8382ff1061d.png)
 
-### 6. Duplicate the stack
+### **6. Duplicate the stack**
 
 Select the Bin-Opening window that you just created. **Duplicate** the **stack**. Rename one of the images as “Binary” and the other as “Seeds”. **Save** the **Binary** image in your computer as you might need it after.
 
-### 7. Assure that the binary options are correct
+### **7. Assure that the binary options are correct**
 
 **Assure that the binary options are correct**. Before continue, you need to check if the binary options are correct, as the next steps could go wrong if not. Go to **Process > Binary > Options…** Check that everything is settled as the following and pass to the next step. The most important feature is that **Black background** is selected.
 
 ![image](https://user-images.githubusercontent.com/91415505/145828365-57c3fde3-7280-46ed-8ac9-9f5d3c3ac7d3.png)
 
-### 8. Ultimate Points
+### **8. Ultimate Points**
 
 Select the Seeds window. Get the **Ultimate Points**. We need them for the seed creation. Go to **Process > Binary > Ultimate Points**. Choose “**Yes**” when ImageJ asks you if you want to process all the stack. 
 
-### 9. Make it Binary
+### **9. Make it Binary**
 
 We need to assure that the stack is binary. Go to **Process > Binary > Make Binary**. Check that all options are as they follow. 
 
 ![image](https://user-images.githubusercontent.com/91415505/145829138-ef2a9818-bd91-43c4-8356-b8a5e1ca1a2b.png)
 
-### 10. Dilation
+### **10. Dilation**
 
 We need to apply a **3D morphological operation**, a Dilation, to get a proper seed size. Go to **Plugins > MorphoLibJ > Morphological Filters (3D)**. We select **Dilation** in “Operation” and **Ball** in “Element shape”. In our case, we select a value of 10 pixels in the X and Y radius. This value is appropriate in this stack, but this does not always happen. You should try with different seed sizes (e.g. radius of 5, 20, 30…) to see which one is the optimal for your image stacks. In the Z radius, select 0 pixels. Rename the result as “Final Seeds”. 
 
 ![image](https://user-images.githubusercontent.com/91415505/145829433-386e6a1a-8362-4183-a51c-305a8ceb1dcd.png)
 
-### 11. 3D Watershed Split
+### **11. 3D Watershed Split**
 
 Now that we have a proper seed and binary stacks, it is time to start the segmentation. We go to **Plugins > 3D > 3D Watershed Split**. We select **Binary** at the “Binary mask” drop-down, and **Final Seeds** at the “Seeds” drop-down. At the “radius” setting, we leave the default value of 2. Two stacks will appear, one called “EDT”, that we will not use (you can close it) and one called “Split”, which is the one where the segmentation has been done. 
 
 ![image](https://user-images.githubusercontent.com/91415505/145829686-66f237f0-6d9b-4d1e-b2cd-3359d1a8a291.png)
 
-### 12. Manual correction and re-segmentation
+### **12. Manual correction and re-segmentation**
 
 Ideally, at this point the segmentation in Split could be perfect and we would continue with the cytoplasm estimation and measurement/quantification, but this is not the most likely scenario. Normally, the Split stack will contain some errors that we should correct manually before going far away. Therefore, this step is optional, and you can repeat it as many times as you want until you are happy with your nuclei segmentation. 
 
@@ -134,13 +134,13 @@ Now, you should have a correct nuclei segmentation stack. It is time to move on 
 
 ![image](https://user-images.githubusercontent.com/91415505/145831684-1990a28f-5cf7-49f6-bf9b-6170df34418e.png)
 
-### 13. Nuclei to cell
+### **13. Nuclei to cell**
 
 Nuclei to cell. Once you have the nuclei segmentation stack, is time to estimate the cell objects. For that purpose, we select the final nuclei segmentation stack and go to **Plugins > MorphoLibJ > Label Images > Dilate Labels**. Here, you need to select a radius that is high enough to fill all the space between the labels. In our case, we select a value of 100 pixels, as it is big enough to fulfill all the empty space between nuclei. In your case, try different values and see which one is big enough to fill this space (but no too much big, as it could make gigantic cells in the slices where there are few cells, just a medium point). Save the result as your cell segmentation stack.
 
 ![image](https://user-images.githubusercontent.com/91415505/145831914-c7269872-5de6-4714-a1c5-e38b80e478a6.png)
 
-### 14. Measure and quantification
+### **14. Measure and quantification**
 
 For this purpose, we will use the 3D ROI Manager. Go to **Plugins > 3D > 3D Manager**. Click on the settings button and select the measurements that you need for your experiment. Once you did it, it is time to start measuring. Open in ImageJ the Intensity stack and the cell and nuclei segmentation ones. Select the nuclei window and click on “Add image” in the 3D Manager. In the list at the left, you will see how the different objects of your stack appear. Once they are added, you just need to select the Intensity stack and click on the “Measure 3D” and “Quantif 3D”. Do the same with the cell stack. Save your results. 
 
