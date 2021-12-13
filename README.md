@@ -9,7 +9,9 @@ The goal of this pipeline is to correctly segment the nuclei of the cells, then 
 _**Requirements**_:
 
 This cell segmentation was made using ImageJ (Fiji), version 1.53f51. 
-You need to have the **MorphoLibJ** and the ImageJ **3D Suite** Plugins installed. To install them:
+You need to have the **MorphoLibJ** (https://imagej.net/plugins/morpholibj) and the ImageJ **3D Suite** (https://imagej.net/plugins/3d-imagej-suite/Plugins) installed.
+
+To install them:
 
 -**3D Suite**: Add **Java8** and **ImageScience** to the ImageJ updater.
 
