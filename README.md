@@ -19,7 +19,7 @@ To install them:
 
 ### **1. Split Channels**
 
-Select the [Original file](3D-cell-segmentation-with-ImageJ/Original.tif). Run **Split Channels**. In the ImageJ main menu, go to **_Image > Color > Split Channels_**. You can rename the first channel as “**Intensity**”, and the third channel as “**Nuclei**”. **Select** the Nuclei window.
+Select the [Original](https://github.com/prubiocosta/3D-cell-segmentation-with-ImageJ/Stacks/Original.tif) file. Run **Split Channels**. In the ImageJ main menu, go to **_Image > Color > Split Channels_**. You can rename the first channel as “**Intensity**”, and the third channel as “**Nuclei**”. **Select** the Nuclei window.
 
 ![image](https://user-images.githubusercontent.com/91415505/145821230-af10218c-48ea-4fd6-ab66-3ff42e796af7.png)
 
@@ -69,7 +69,7 @@ Select the Bin-Opening window that you just created. **Duplicate** the **stack**
 
 ### **8. Ultimate Points**
 
-Select the Seeds window. Get the **Ultimate Points**. We need them for the seed creation. Go to **Process > Binary > Ultimate Points**. Choose “**Yes**” when ImageJ asks you if you want to process all the stack. 
+Select the Seeds window. Get the **Ultimate Points**. We need them for the seed creation. Go to **_Process > Binary > Ultimate Points_**. Choose “**Yes**” when ImageJ asks you if you want to process all the stack. 
 
 ### **9. Make it Binary**
 
@@ -112,15 +112,15 @@ At the moment, we will just focus on the 2 errors. The goal of this step is, wit
 
 ![image](https://user-images.githubusercontent.com/91415505/145831026-bf18fca6-6db7-488c-800e-a1293ce271b8.png)
 
-**B.2.** **Add your selection** to the ROI Manager. Go to **Analyze > Tools > ROI Manager…** and click on add once is opened or simply use the shortcut T to add the selection directly. 
+**B.2.** **Add your selection** to the ROI Manager. Go to **_Analyze > Tools > ROI Manager…_** and click on add once is opened or simply use the shortcut T to add the selection directly. 
 
 **B.3.** **Repeat** this steps for all the nuclei that should be divided in the ROI manager. Then go to the next point.
 
-**B.4.** In the ROI manager, click on the **Deselect** button. Then go to **More» > OR (combine)**. You should now see a selection that encompasses all ROIs. Click the **Add** button. Then, at the end of the ROI list, you should see a ROI which is the combination of all. Click on that ROI. Then, in the ImageJ main menu, go to **Process> Math > Set…** Select a value of 0. Click OK and select yes when ImageJ asks you if you want to process all the stack. At this moment, you should have a black line in the places where you drew lines, and all the nuclei individually divided:
+**B.4.** In the ROI manager, click on the **Deselect** button. Then go to **_More» > OR (combine)_**. You should now see a selection that encompasses all ROIs. Click the **Add** button. Then, at the end of the ROI list, you should see a ROI which is the combination of all. Click on that ROI. Then, in the ImageJ main menu, go to **_Process> Math > Set…_** Select a value of 0. Click OK and select yes when ImageJ asks you if you want to process all the stack. At this moment, you should have a black line in the places where you drew lines, and all the nuclei individually divided:
 
 ![image](https://user-images.githubusercontent.com/91415505/145831178-55023a52-e5ad-4613-8db7-5a63165825c8.png)
 
-**C.** **Seed creation**. Now, you need to use the edited stack that you just created as seeds for segmentation. First, you need to apply an erosion. Select the stack and go to **Plugins > MorphoLibJ > Morphological filters (3D)**. Select Erotion in “Operation” and Ball in “Element shape”. Select 0 pixels in the z radius. In our case, we select a value of 5 pixels in the X and Y radius. Rename the results as “New seeds”. You should have a result that look like this:
+**C.** **Seed creation**. Now, you need to use the edited stack that you just created as seeds for segmentation. First, you need to apply an erosion. Select the stack and go to **_Plugins > MorphoLibJ > Morphological filters (3D)_**. Select Erotion in “Operation” and Ball in “Element shape”. Select 0 pixels in the z radius. In our case, we select a value of 5 pixels in the X and Y radius. Rename the results as “New seeds”. You should have a result that look like this:
 
 ![image](https://user-images.githubusercontent.com/91415505/145831261-afb0c09d-ff07-437d-a894-4b33b330d9e0.png)
 
@@ -132,9 +132,9 @@ At the moment, we will just focus on the 2 errors. The goal of this step is, wit
 
 ![image](https://user-images.githubusercontent.com/91415505/145831471-22604b38-fd97-479c-8fd0-fc1cb1dddbd8.png)
 
-•	For binding labels, select them by click on it and hit the “Merge” button. If you have any wrong point selection and you want to erase them, use the shortcut Shift + A. 
+- For binding labels, select them by click on it and hit the “Merge” button. If you have any wrong point selection and you want to erase them, use the shortcut Shift + A. 
 
-•	Once you have the correct labels (one label per nuclei) click on the “Close” button to delete any watershed errors and save the result by closing the editor and saving the processed image. 
+- Once you have the correct labels (one label per nuclei) click on the “Close” button to delete any watershed errors and save the result by closing the editor and saving the processed image. 
 
 Now, you should have a correct nuclei segmentation stack. It is time to move on to the next step.
 
