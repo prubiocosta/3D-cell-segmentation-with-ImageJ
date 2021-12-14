@@ -19,7 +19,7 @@ To install them:
 
 ### **1. Split Channels**
 
-Run **Split Channels**. You can rename the first channel as “**Intensity**”, and the third channel as “**Nuclei**”. **Select** the Nuclei window.
+Select the [Original file](3D-cell-segmentation-with-ImageJ/Original.tif). Run **Split Channels**. You can rename the first channel as “**Intensity**”, and the third channel as “**Nuclei**”. **Select** the Nuclei window.
 
 ![image](https://user-images.githubusercontent.com/91415505/145821230-af10218c-48ea-4fd6-ab66-3ff42e796af7.png)
 
