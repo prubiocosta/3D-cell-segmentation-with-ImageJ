@@ -153,7 +153,7 @@ For this purpose, we will use the **3D ROI Manager**. Go to **_Plugins > 3D > 3D
 
 If you have any doubt, error or suggestion, feel free to contact me (Pau) and I will do my best: 
 
-Email: prcosta@fc.ul.pt
+Email: paurubiocosta@gmail.com
 
 
 
